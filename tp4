@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+ typedef struct noeud {
+  int valeur;
+  struct noeud*suivant;
+ }noeud;
+ void push(noeud**everest,int data){
+ noeud*p=NULL;
+ p=(noeud*)malloc(sizeof(noeud));
+ if(p){
+  p->valeur=data;
+  p->suivant=*everest;
+  *everest=p;
+}
+ }
+
+  void pop(noeud**everest){
+  noeud*p;
+  if(everest!=NULL){
+    p=*everest;
+    *everest=(*everest)->suivant;
+    free(p);
+  }
+  }
+   void afficher_everest(noeud**everest)  {
+  if(everest!=NULL){
+   printf("la premiere valeur est %d",(*everest)->valeur) ;
+
+    }
+   }
+   void afficher_tout(noeud**everest)  {
+       noeud*p;
+  if(everest!=NULL){
+        p=*everest;
+  while(p!=NULL){
+  printf("la valeur est %d",p->valeur) ;
+
+    p=p->suivant;
+
+  }
+    }
+   }
+
+int main()
+{
+noeud*everest=NULL;
+push(&everest,16);
+push(&everest,18);
+push(&everest,15);
+push(&everest,32);
+afficher_everest(&everest);
+afficher_tout(&everest);
+pop(&everest);
+pop(&everest);
+pop(&everest);
+pop(&everest);
+    return 0;
+}
