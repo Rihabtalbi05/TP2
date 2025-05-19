@@ -1,0 +1,167 @@
+#include <stdio.h>
+#include <stdlib.h>
+ typedef struct Etudiant {
+ int id;
+ char nom[50];
+ float moyenne;
+ struct Etudiant*suivant;
+   struct Etudiant*precedent;
+ }
+ Etudiant*creer_etudiant(){
+  Etudiant*nouveau=(Etudiant*)malloc(sizeof(Etudiant));
+  if(nouveau){
+  printf("donner id du nouveau");
+  scanf("%d",&nouveau->id);
+   printf("donner nom du nouveau");
+  scanf("%s",nouveau->nom);
+   printf("donner  la moyenne du nouveau");
+  scanf("%f",&nouveau->moyenne);
+    nouveau->suivant=null;
+    nouveau->precedant=null;
+
+
+
+
+  }
+
+ }
+ int longueur(Etudiant *tete){
+ int i=0;
+ Etudiant*T;
+ if(tete!=null){
+   T=tete;
+while{ T!=null){
+    i++;
+T=T->next;
+}
+ }
+return i;
+ }
+ Etudiant*ajouter_position(Etudiant*tete,Etudiant*nv,int position){
+ Etudiant*t;
+ if(tete!=null){
+  t=tete;
+  while(t->next!=null&&t-> !=position){
+
+    t=t->suivant;
+  }
+  if (    ) {
+   nouveau->suivant=t->suivant;
+    nouveau->precedent=t;
+  }
+  if(t->next!=null){
+    t->suivant->precedent=nouveau;
+
+    t->suivant=nouveau;
+  }
+
+ }
+ return tete;
+ }
+
+  Etudiant*supprimer_position(Etudiant*tete,int position){
+  Etudiant *nv,t;
+  if(tete!=null){
+    t=tete;
+    while(t->suivant!=null&&){
+       t=t->suivant;
+    }
+
+    if( ){
+
+
+
+
+
+
+
+    }
+
+  }
+
+
+  void afficher_liste(Etudiant*tete){
+  Etudiant t;
+  if(tete!=null){
+    t=tete;
+    while(t!=null){
+
+      printf(" %d %s %f ",nouveau->id,nouveau->nom,nouveau->moyenne );
+        t=t->suivant;
+    }
+
+  }
+
+  }
+
+  Etudiant*derniere_cellule(Etudiant*tete){
+
+  Etudiant t;
+
+ if(tete!=null){
+
+ t=tete;
+ while(t!=null){
+
+  t=t->suivant;
+ }
+  return t;
+
+  }
+  }
+
+void afficher_liste_inverser(Etudiant*dernier){
+ Etudiant t;
+ if(tete!=null){
+
+ t=tete;
+while(t->suivant!=null){
+
+   t=t->suivant ;
+ }
+
+while(t->precedent!=null){
+
+   printf(" %d %s %f ",nouveau->id,nouveau->nom,nouveau->moyenne );
+        t=t->precedent;
+
+
+}
+ }
+}
+
+int recherche_etudiant(Etudiant*tete,int id){
+Etudiant t;
+dp=0;
+ if(tete!=null){
+
+ t=tete;
+
+ while(t->suivant!=null){
+ if(nouveau->id==id){
+    dp=1;
+
+    break;
+
+ }
+
+else{
+   t=t->suivant ;
+
+}
+  if(dp==0){
+    return 0;
+  }
+  else{
+    return 1;
+  }
+ }
+ }
+}
+
+
+int main()
+{
+    printf("Hello world!\n");
+    return 0;
+}
