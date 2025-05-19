@@ -1,0 +1,29 @@
+ #include<stdlio.h>
+ #include<stdlib.h>
+
+ int main() {
+    if (fichier == NULL) {
+    }
+    printf("Entrez votre nom : ");
+    scanf("%s", nom);
+    printf("Entrez votre age : ");
+    scanf("%d", &age);
+    fprintf(fichier, "Nom : %s\nAge : %d\n", nom, age);
+    fclose(fichier);
+    printf("Donnees enregistrees avec succès.\n");
+    while ((c = fgetc(fichier)) != EOF) {
+    caracteres++;
+    if (c == '\n') {
+    lignes++;}
+    }
+    if (lsspace(c)) {
+    dansNot = 0;
+    else if (dansNot) {
+    dansNot = 1;
+    nots++;
+    }
+    }
+   }
+   }
+
+    return 0;
