@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Noeud {
+    int valeur;
+    struct Noeud* suivant;
+    struct Noeud* precedent;
+} Noeud;
+Noeud*cree(int valeur) {
+    Noeud* p = (Noeud*)malloc(sizeof(Noeud));
+    if (p) {
+        p->valeur = valeur;
+        p->suivant = NULL;
+        p->precedent = NULL;
+    }
+    return p;
+}
+void affiche(Noeud* debut) {
+    Noeud* tmp = debut;
+    while (tmp != NULL) {
+        printf("La valeur est %d", tmp->valeur);
+        tmp = tmp->suivant;
+    }
+}
+
+void affiche_inverse(Noeud* debut) {
+    if (debut == NULL)
+        return NULL;
+    Noeud* tmp = debut;
+    while (tmp->suivant != NULL) {
+        tmp = tmp->suivant;
+    }
+
+    while (tmp != NULL) {
+        printf("La valeur est %d", tmp->valeur);
+        tmp = tmp->precedent;
+    }
+}
+Noeud* ajouter_d(Noeud* debut, int valeur) {
+    Noeud* nv = cree(valeur);
+    if (!nv)
+        return debut;
+
+    nv->suivant = debut;
+    if (debut)
+        debut->precedent = nv;
+    return nv;
+}
+Noeud* ajouter_f(Noeud* debut, int valeur) {
+    Noeud* nv = cree(valeur);
+    if (!nv)
+    return debut;
+    if (!debut)
+    return nv;
+    Noeud* tmp = debut;
+    while (tmp->suivant != NULL) {
+        tmp = tmp->suivant;
+    }
+
+    tmp->suivant = nv;
+    nv->precedent = tmp;
+
+    return debut;
+}
+int taille(Noeud* debut) {
+    int i = 0;
+    Noeud* tmp = debut;
+    while (tmp) {
+        i++;
+        tmp = tmp->suivant;
+    }
+    return i;
+}
+Noeud* modifier_position(Noeud* debut, int position, int nouvelle_valeur) {
+    if (position < 0)
+        return debut;
+    int i = 0;
+    Noeud* tmp = debut;
+    while (tmp != NULL && i < position) {
+        tmp = tmp->suivant;
+        i++;
+    }
+
+    if (tmp != NULL) {
+        tmp->valeur = nouvelle_valeur;
+    } else {
+        printf("Position %d invalide", position);
+    }
+
+    return debut;
+}
+
+int main() {
+    Noeud* liste=NULL;
+    liste = ajouter_f(liste, 1);
+    liste = ajouter_f(liste, 2);
+    liste = ajouter_f(liste, 3);
+    liste = ajouter_f(liste, 4);
+
+    printf("Liste initiale :");
+    affiche(liste);
+    liste = modifier_position(liste, 4, 84);
+
+    printf("Liste après modification à la position 4:");
+    affiche(liste);
+
+    printf("Affichage inverse :");
+    affiche_inverse(liste);
+
+    printf("Taille de la liste : %d", taille(liste));
+
+    return 0;
+}
