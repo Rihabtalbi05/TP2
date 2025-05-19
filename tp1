@@ -1,0 +1,172 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Noeud {
+    int valeur;
+    struct Noeud *suivant;
+} Noeud;
+
+
+Noeud* cree(int valeur) {
+    Noeud* P = (Noeud*)malloc(sizeof(Noeud));
+    if (P) {
+        P->valeur = valeur;
+        P->suivant = NULL;
+    }
+    return P;
+}
+
+
+void affiche(Noeud* debut) {
+    Noeud* temp = debut;
+    while (temp != NULL) {
+        printf("%d ", temp->valeur);
+        temp = temp->suivant;
+    }
+    printf("NULL");
+}
+
+
+Noeud* ajouterD(Noeud* debut, int valeur) {
+    Noeud* C = cree(valeur);
+    C->suivant = debut;
+    return C;
+}
+Noeud* ajouterF(Noeud* debut, int valeur) {
+    Noeud* F = cree(valeur);
+    if (debut == NULL)
+        return F;
+
+    Noeud* temp = debut;
+    while (temp->suivant != NULL)
+        temp = temp->suivant;
+    temp->suivant = F;
+    return debut;
+}
+
+
+int taille(Noeud* debut) {
+    int I = 0;
+    Noeud* temp = debut;
+    while (temp != NULL) {
+        I++;
+        temp = temp->suivant;
+    }
+    return I;
+}
+
+void rechercher(Noeud* debut, int valeur) {
+    Noeud* temp = debut;
+    while (temp != NULL) {
+        if (temp->valeur == valeur) {
+            printf("La valeur %d existe", valeur);
+            return;
+        }
+        temp = temp->suivant;
+    }
+    printf("La valeur %d n'existe pas", valeur);
+}
+
+
+Noeud* supprimeDebut(Noeud* debut) {
+    if (debut != NULL) {
+        Noeud* T = debut;
+        debut = debut->suivant;
+        free(T);
+    }
+    return debut;
+}
+
+
+Noeud* supprimeFin(Noeud* debut) {
+    if (debut == NULL)
+        return NULL;
+
+    if (debut->suivant == NULL) {
+        free(debut);
+        return NULL;
+    }
+
+    Noeud* temp = debut;
+    while (temp->suivant->suivant != NULL) {
+        temp = temp->suivant;
+    }
+
+    free(temp->suivant);
+    temp->suivant = NULL;
+
+    return debut;
+}
+
+
+Noeud* modifierDebut(Noeud* debut, int valeur) {
+    if (debut != NULL)
+        debut->valeur = valeur;
+    return debut;
+}
+
+
+Noeud* modifierFin(Noeud* debut, int valeur) {
+    Noeud* temp = debut;
+    if (temp == NULL)
+return NULL;
+
+    while (temp->suivant != NULL) {
+        temp = temp->suivant;
+    }
+    temp->valeur = valeur;
+    return debut;
+}
+
+
+Noeud* modifierValeur(Noeud* debut, int valeurRecherchee, int nouvelleValeur) {
+    Noeud* temp = debut;
+    while (temp != NULL) {
+        if (temp->valeur == valeurRecherchee) {
+            temp->valeur = nouvelleValeur;
+            break;
+        }
+        temp = temp->suivant;
+    }
+    return debut;
+}
+
+
+int main() {
+    Noeud* A = cree(10);
+    Noeud* B = cree(20);
+    Noeud* C = cree(30);
+
+    A->suivant = B;
+    B->suivant = C;
+
+    affiche(A);
+
+    A = ajouterD(A, 17);
+    affiche(A);
+
+    A = ajouterF(A, 43);
+    affiche(A);
+
+    printf("Taille: %d", taille(A));
+
+    rechercher(A, 33);
+    rechercher(A, 75);
+
+    A = supprimeDebut(A);
+    affiche(A);
+
+    A = supprimeFin(A);
+    affiche(A);
+
+    A = modifierDebut(A, 44);
+    affiche(A);
+
+    A = modifierFin(A, 42);
+    affiche(A);
+
+    A = modifierValeur(A, 20, 22);
+    affiche(A);
+
+    return 0;
+}
