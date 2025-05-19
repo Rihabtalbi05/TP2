@@ -1,0 +1,64 @@
+#include<stdlio.h>
+ #include<stdlib.h>
+ typedef struct node {
+    int data ;
+    struct node*next;
+} node;
+node*debut = NULL;
+node*fin = NULL;
+void enfiler(int valeur){
+node*nv=(node*)malloc (sizeof(node));
+
+nv->data=valeur;
+nv->next=NULL;
+if(fin==NULL){
+  debut=fin=nv;
+}
+else{
+    fin->next=nv;
+    fin=nv;
+}
+}
+
+void defiler(){
+node*temp;
+if(debut!=NULL){
+
+ temp=*debut;
+  *debut=(*debut)->next;
+  if(*debut==NULL)
+  debut=fin=NULL;
+  free(temp);
+}
+
+}
+void afficher(node*debut){
+
+node*temp=*debut;
+if(debut!=NULL){
+ while(temp!=NULL){
+  printf("la valeur est %d",temp->data)  ;
+
+   temp=temp->next;
+
+ }
+}
+}
+void viderfile(){
+while(*debut){
+  defiler(debut)  ;
+
+}
+}
+int main(){
+    node*debut=NUll;
+enfiler(&debut,10);
+enfiler(&debut,20);
+enfiler(&debut,30);
+afficher(&debut);
+defiler();
+afficher(&debut);
+viderfile();
+
+return 0;
+}
